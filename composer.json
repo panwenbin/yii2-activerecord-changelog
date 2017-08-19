@@ -1,0 +1,29 @@
+{
+  "name": "panwenbin/yii2-activerecord-changelog",
+  "description": "Log Yii2 active record changes",
+  "keywords": [
+    "ActiveRecord",
+    "Yii2",
+    "changelog",
+    "history",
+    "log"
+  ],
+  "type": "yii2-extension",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Pan Wenbin",
+      "email": "panwenbin@gmail.com"
+    }
+  ],
+  "version": "0.1.0",
+  "require": {
+    "yiisoft/yii2": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "panwenbin\\yii2\\activerecord\\changelog\\": "src/"
+    }
+  }
+}
