@@ -15,6 +15,10 @@ use yii\base\Event;
 use yii\db\ActiveRecord;
 use yii\db\AfterSaveEvent;
 
+/**
+ * Class ActiveRecordChangeLogBehavior
+ * @package panwenbin\yii2\activerecord\changelog\behaviors
+ */
 class ActiveRecordChangeLogBehavior extends Behavior
 {
     public $ignoreAttributes = [];
@@ -45,12 +49,15 @@ class ActiveRecordChangeLogBehavior extends Behavior
         $log = new ActiveRecordChangeLog();
         if ($event instanceof AfterSaveEvent) {
             $oldAttributes = $event->changedAttributes;
+            $oldAttributes = array_diff_key($oldAttributes, array_combine($this->ignoreAttributes, $this->ignoreAttributes));
             $newAttributes = array_intersect_key($model->attributes, $oldAttributes);
             $log->old_attributes = json_encode($oldAttributes);
             $log->new_attributes = json_encode($newAttributes);
         }
-        $log->model = $model::className();
         $log->event = $event->name;
+        $log->model = $model::className();
+        $primaryKeys = $model::primaryKey();
+        $log->pk = json_encode(array_intersect_key($model->attributes, array_combine($primaryKeys, $primaryKeys)));
         $log->created_at = time();
         $log->save();
     }

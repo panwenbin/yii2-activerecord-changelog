@@ -11,12 +11,13 @@ use yii\db\ActiveRecord;
 /**
  * Class ActiveRecordChangeLog
  * @property integer $id
- * @property string $model
  * @property string $event
+ * @property string $model
+ * @property string $pk
  * @property string $old_attributes
  * @property string $new_attributes
  * @property integer $created_at
- * @package panwenbin\yii2
+ * @package panwenbin\yii2\activerecord\changelog
  */
 class ActiveRecordChangeLog extends ActiveRecord
 {
