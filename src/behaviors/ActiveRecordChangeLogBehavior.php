@@ -55,10 +55,11 @@ class ActiveRecordChangeLogBehavior extends Behavior
             $log->new_attributes = json_encode($newAttributes);
         }
         $log->event = $event->name;
+        $log->route = \Yii::$app->requestedRoute;
         $log->model = $model::className();
         $primaryKeys = $model::primaryKey();
         $log->pk = json_encode(array_intersect_key($model->attributes, array_combine($primaryKeys, $primaryKeys)));
-        $log->created_at = time();
+        $log->log_at = time();
         $log->save();
     }
 }
